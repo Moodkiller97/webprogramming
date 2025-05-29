@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!<!-- Name: Joy Samudio
+Assignment: Time of day
+Course: Web Application Programming-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic webpage</title>
+    <style>
+        body {
+            transition: background-color 1s ease;
+            font-family: 'Calibri', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .left-section {
+            text-align: left;
+            color: white;
+            position: absolute;
+            top: 20px;
+            left: 30px;
+        }
+
+        .center-section {
+            text-align: center;
+            margin-top: 200px;
+            color: white;
+        }
+
+        small {
+            font-size: 14px;
+            color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-section">
+        <h1>Joy Samudio</h1>
+        <h2>Course: Web Applications Programming</h2>
+        <h2>Major: Computer Science</h2>
+        <p id="initialGreeting">Welcome to my dynamic webpage!</p>
+    </div>
+
+    <div class="center-section" id="greetingSection">
+        
+    </div>
+
+    <script>
+        //logic to make sure that the colors change base on time
+        function setBackgroundBasedOnTime() {
+            const now = new Date();
+            const hour24 = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            // Convert to 12-hour time
+            const displayHour = hour24 % 12 || 12;
+            const period = hour24 >= 12 ? "PM" : "AM";
+            const formattedTime = `${displayHour}:${minutes} ${period}`;
+
+            let bgColor, message;
+
+if (hour24 >= 6 && hour24 < 12) {
+                     // Morning gradient colors
+   bgColor = "linear-gradient(to right, #FFDD00, #87CEFA)";
+message = "Good Morning, lets get the day started!";
+} else if (hour24 >= 12 && hour24 < 18) {
+    // Afternoon clors
+    bgColor = "linear-gradient(to right, #ADD8E6, #40E0D0)";
+    message = "Good Afternoon, keept it up we are halfway there!";
+} else if (hour24 >= 18 && hour24 < 21) {
+    // Evening gradient colors
+    bgColor = "linear-gradient(to right, #FF8C00, #FF4500)";
+    message = "Good Evening! Almost done";
+} else {
+    // Night gradient colors
+    bgColor = "linear-gradient(to right, #191970, #4B0082)";
+    message = "You made it, rest. Good Night!";
+}
+
+document.body.style.background = bgColor;
+    // to apply gradient colors
+
+            const greetingDiv = document.getElementById('greetingSection');
+            greetingDiv.innerHTML = `<h2>${message}</h2><small>It’s ${formattedTime}</small>`;
+        }
+
+        window.onload = setBackgroundBasedOnTime;
+        // make sure that the page check time at refresh
+    </script>
+</body>
+</html>
